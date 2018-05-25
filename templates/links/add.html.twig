@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout - Annuaire de lien{% endblock %}
+
+{% block body %}
+    
+{#     {{ form_start(form) }}
+	{{ form_errors(form) }}
+	{{ form_rest(form) }}
+	<button type="submit" class="btn btn-primary">Save</button>
+	{{ form_end(form) }} #}
+
+	{% include 'inc_navbar.html.twig' %}
+    
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="text-center">{% if form.name.vars.value %}Modification {% else %}Ajout {% endif %}d'un lien</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form_label(form.name, 'Nom du lien :') }} {{ form_widget(form.name) }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form_label(form.url, 'URL du lien :') }} {{ form_widget(form.url) }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form_label(form.tagline, 'Accroche :') }} {{ form_widget(form.tagline) }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form_label(form.detail, 'Description détaillée :') }} {{ form_widget(form.detail, { 'attr':{ 'cols' : '50', 'rows' : '10', } })}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        	<div class="row">
+	                            {#
+	                            <div class='col-md-12'>
+	                                {{form_label(form.idcategory,'Catégorie : ')}} {{form_widget(form.idcategory,{ 'attr':{ 'class': 'form-control mb-1', } })}}
+	                            </div> #} 
+	                            <div class='col-md-12'>
+	                            	{{ form_label(form.image, 'Image :') }} {{ form_widget(form.image) }}
+	                            </div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('home') }}">
+                        <button class="btn btn-primary" type="button">Annuler</button>
+                    </a>
+                    <button class="btn {% if form.name.vars.value %}btn-warning {% else %}btn-success {% endif %} float-right" type="submit"><i class="fas fa-plus-circle fa-lg"></i>&nbsp;{% if form.name.vars.value %}Modifier {% else %} Ajouter {% endif %}le lien</button>
+                </div>
+            </div>
+            {{ form_errors(form) }} {{ form_rest(form) }} {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+	{% include 'inc_footer.html.twig' %}
+
+{% endblock %}

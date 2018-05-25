@@ -1,0 +1,72 @@
+<!-- Bloc liens -->
+<div class="container">
+
+    
+    <!-- Ligne -->
+    <div class="row mb-2">
+        {% for link in links %}
+            <div class="col-xl-4 col-md-6">
+        
+                <!-- Carte du lien -->
+                <div class="card mt-2">
+                    <a class="card-header bg-link" href="#" data-toggle="modal" data-target="#lienModal{{ link.id }}"><h3 class="text-center">{{ link.name }}</h3></a>
+                    <a class="card-body" href="#" data-toggle="modal" data-target="#lienModal{{ link.id }}">
+                        <h5>{{ link.tagline }}</h5>
+                        <p class="text-muted">
+                            {% set text = link.detail|striptags %}
+                            {{ text|length > 200 ? text|slice(0, 200) ~ ' ...' : text }}
+                        </p>
+                    </a>
+                    <div class="card-footer">
+                        <ul class="list-inline float-left">
+                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 1</a></li>
+                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 2</a></li>
+                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 3</a></li>
+                        </ul>
+                        <a class="btn btn-primary float-right" href="{{ link.url }}" target="_blank" role="button">Visiter &nbsp;<i class="fa d-inline fa-lg fa-link"></i></a>
+                    </div>
+                    
+                </div>
+
+                <!-- Fenêtre modale de du lien -->
+                <div class="modal fade" id="lienModal{{ link.id }}" tabindex="-1" role="dialog" aria-labelledby="lienModal{{ link.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-link">
+                                <h3 class="modal-title" id="titreLienModal">{{ link.name }}</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="{{ link.url }}" target="_blank"><img src="{{ link.image }}" alt="Logo" class="img-thumbnail"></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h5>{{ link.tagline }}</h5>
+                                        <p class="text-muted">{{ link.detail }}</p>
+                                        <p class="float-right font-italic">Liens créé le {{ link.datecreate|date("d/m/Y") }} par Utilisateur</p>
+                                        <br/><br/>
+                                        <a class="btn btn-primary float-right" href="{{ link.url }}" target="_blank" role="button"> Accéder au site &nbsp;<i class="fa d-inline fa-lg fa-link"></i></a>
+                                        <ul class="list-inline float-left">
+                                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 1</a></li>
+                                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 2</a></li>
+                                            <li class="list-inline-item"><a class="badge badge-info" href="">M-Clé 3</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                    <a href="{{ path('edit', {id: link.id}) }}"><button  class="btn btn-warning float-right" type="button" data-toggle="tooltip" data-placement="bottom" title="Modifier"><i class="fas fa-edit fa-lg"></i></button></a>
+                                    <a href="{{ path('delete', {id: link.id}) }}"><button class="btn btn-danger float-right" type="button" data-toggle="tooltip" data-placement="bottom" title="Supprimer"><i class="fas fa-trash-alt fa-lg"></i></button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}    
+    </div>
+    
+
+</div>

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Annuaire de liens{% endblock %}
+
+{% block body %}
+
+    {% include 'inc_navbar.html.twig' %}
+
+    <div class="container">
+        <div class="row mt-2 align-items-center">
+
+            {% include '/links/inc_search.html.twig' %}
+
+            <!-- Ajout d'un Lien (si connecté) -->
+            {% include '/links/inc_addbtn.html.twig' %}
+
+        </div>
+    </div>
+
+    {% include 'links/inc_sorting.html.twig' %}
+
+    {% include 'links/inc_linkslist.html.twig' %}
+    
+    {% include 'inc_footer.html.twig' %}
+
+{#     <h3>
+       	<a href="{{ path("add") }}">
+            Nouveau Lien
+        </a>
+    </h3> #}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Annuaire de liens{% endblock %}
+
+{% block body %}
+
+    {% include 'inc_navbar.html.twig' %}
+
+	<div class="container">
+		<div class="row mt-2">
+
+			{% include 'users/inc_userslist.html.twig' %}
+
+			{% include 'users/inc_addbtn.html.twig' %}
+
+		</div>
+	</div>
+
+	{% include 'inc_footer.html.twig' %}
+
+{% endblock %}
