@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-2 align-items-center">
+
+            <!-- Champs de recherche -->
+            <div class="col-md-6">
+                <form action="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Recherche par mots-clés">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <small class="form-text text-muted">Exemple de mots-clefs : Informatique, Loisirs, Limoges</small>
+                </form>
+            </div>
+            {% if is_granted('ROLE_USER') %}
+                <div class="col-md-6 text-right">
+                    <a href="{{path('addlink')}}" class="btn btn-secondary" type="button">Ajouter un lien <i class="fas fa-plus-circle fa-md"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Outils de tri -->
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown"> Trier par</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Du + au - récent</a>
+                        <a class="dropdown-item" href="#">Du - au + récent</a>
+                        <a id="trialpha" class="dropdown-item" href="#">Par ordre alphabétique</a>
+                    </div>
+                </div>
+                <a class="btn btn-primary" href="#">Tous les liens</a>
+            </div>
+        </div>
+    </div>
+{% if links is not empty %}
+    {% include 'links/front.html.twig' %}
+	{% include 'links/pagination.html.twig' %}
+{% else %}
+    <p>Il n'y a aucun lien pour l'instant.</p>
+{% endif %}
+
+
+{% endblock %}

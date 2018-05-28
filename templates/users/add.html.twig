@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+	<div class="row mt-2">
+		<div class="col-md-2 mb-2">
+		</div>
+		<div class="col-md-8 mb-2">
+		<div class="card">
+			<div class="card-header bg-user">
+				<h5 class="text-center">Profil Utilisateur</h5>
+			</div>
+			<div class="card-body">
+				{{ form_start(form) }}
+				{{ form_errors(form) }}
+				{{ form_rest(form) }}
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-primary" href="{{ path('users') }}">Annuler</a>
+				<button class="btn btn-success float-right" type="submit"><i class="fas fa-plus-circle fa-lg"></i>&nbsp;Sauver</button>
+			</div>
+				{{ form_end(form) }}
+    	</div>
+		<div class="col-md-2 mb-2">
+		</div>
+	</div>
+</div>
+{% endblock %}

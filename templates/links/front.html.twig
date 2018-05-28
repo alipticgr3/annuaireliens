@@ -1,0 +1,95 @@
+<div class="container">
+        <div class="row">
+    {% for link in links %}
+        <div class="col-lg-3 col-md-4 col-sm-6 p-1">
+
+                <!-- Carte du lien -->
+                <div class="card h-100 mt-2">
+                    <a class="card-header bg-link" href="#" data-toggle="modal" data-target="#lienModal{{ link.id }}">
+                        <h4 class="text-center" data-toggle="tooltip" data-placement="bottom" title="Afficher Détails">
+                            <i class="fas {# link.logo #} fa-md float-left"></i>
+                            {{ link.name }}
+                        </h4>
+                    </a>
+                    <div class="card-body">
+                        <h6>{{ link.tagline }}</h6>
+                        <p class="text-muted">{{ link.detail|slice(0, 100) }}...</p>
+                    </div>
+                    <div class="card-footer p-1">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item mr-0">
+                                <a class="badge badge-light" href="">
+                                    Mot 1
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0">
+                                <a class="badge badge-light" href="">
+                                    Mot 2
+                                </a>
+                            </li>
+                            <li class="list-inline-item mr-0 float-right">
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ link.url }}" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Visiter"><i class="fas fa-sm fa-link"></i></a>
+                                    {% if is_granted('ROLE_USER') %}
+                                    {% if app.user.admin or link.iduser.id == app.user.id %}
+                                        <a class="btn btn-warning" href="{{ path('editlink', {id: link.id}) }}" data-toggle="tooltip" data-placement="bottom" title="Modifier" type="button"><i class="fas fa-edit fa-sm"></i></a>
+                                        <a class="btn btn-danger" href="{{ path('dellink', {id: link.id}) }}" data-toggle="tooltip" data-placement="bottom" title="Supprimer" type="button"><i class="fas fa-trash-alt fa-sm"></i></a>
+                                    {% endif %}
+                                    {% endif %}
+                                  
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Fenêtre modale de du lien -->
+                <div class="modal fade" id="lienModal{{ link.id }}" tabindex="-1" role="dialog" aria-labelledby="lienModal{{ link.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-link">
+                                <h3 class="modal-title" id="titreLienModal{{ link.id }}">{{ link.name }}</h3>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>{{ link.tagline }}</h5>
+                                        <p class="text-muted">{{ link.detail }}</p>
+                                        <p class="float-right font-italic">Liens créé le {{ link.datecreate|date("d/m/Y") }} par {#{ link.affutil }#}</p>
+                                        <br/><br/>
+                                        <p><i class="fas {#{ link.logo }#} fa-md">&nbsp;{#{ link.category}#}</i></p>
+                                        <ul class="list-inline float-left">
+                                            <li class="list-inline-item"><a class="badge badge-light" href="">M-Clé 1</a></li>
+                                            <li class="list-inline-item"><a class="badge badge-light" href="">M-Clé 2</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ link.url }}" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Visiter">
+                                        <i class="fas fa-md fa-link"></i>
+                                    </a>
+                                    {% if is_granted('ROLE_USER') %}
+                                    {% if app.user.admin or link.iduser.id == app.user.id %}
+                                        <a class="btn btn-warning" href="{{ path('editlink', {id: link.id}) }}" data-toggle="tooltip" data-placement="bottom" title="Modifier" type="button"><i class="fas fa-edit fa-sm"></i></a>
+                                        <a class="btn btn-danger" href="{{ path('dellink', {id: link.id}) }}" data-toggle="tooltip" data-placement="bottom" title="Supprimer" type="button"><i class="fas fa-trash-alt fa-sm"></i></a>
+                                    {% endif %}
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+	</div>
+</div>
