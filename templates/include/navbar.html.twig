@@ -1,0 +1,33 @@
+    <!-- Barre de navigation -->
+  <nav class="navbar navbar-light navbar-expand-md bg-secondary">
+    <div class="container">
+      <h1>Annuaire de liens internet</h1>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center justify-content-end" id="navbarAdmin">
+          <ul class="nav">
+            {% if app.user %} {# si un user valide est connécté #}
+              {% if app.user.admin %} {# s'il est admin affiche les gestions Liens et Utilisateurs #}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{path('addlink')}}"><i class="fas fa-link"></i>&nbsp;Liens</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('users') }}"><i class="fas fa-users"></i>&nbsp;Utilisateurs</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('edituser',{id : app.user.id})}}"><i class="fas fa-user"></i>&nbsp; {{ app.user.lastname}} {{ app.user.firstname}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary" href="{{ path('\logout')}}" data-toggle="tooltip" data-placement="bottom" title="Déconnexion"><i class="fas fa-power-off"></i></a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ path('home') }}"><i class="fas fa-home"></i>&nbsp;Accueil</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+    </div>
+  </nav>

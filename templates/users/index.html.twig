@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+	<div class="row mt-2">
+		<div class="col-md-8 mb-2">
+
+		<!-- Liste des Utilisateurs -->
+			<div class="card">
+				<div class="card-header bg-user">
+					<h5 class="text-center">Liste des utilisateurs</h5>
+				</div>
+				<div class="card-body">
+					<form action="" method="POST">
+						<div class="input-group mb-2">
+							<input type="text" class="form-control" placeholder="Recherche">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</form>
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Nom</th>
+								<th scope="col">Prénom</th>
+								<th scope="col">Email</th>
+								{#<th scope="col">Mot de passe</th>
+								<th scope="col">Date de création</th>#}
+								<th scope="col">Gestion</th>
+							</tr>
+						</thead>
+						<tbody>
+    					{% for user in users %}
+	    					<tr>
+								<th scope="row">{{ user.lastname }}</th>
+								<td>{{ user.firstname }}</td>
+								<td>{{ user.email }}</td>
+								{#<td>{{ user.datecreate}}</td>#}
+								<td>
+									<div class="btn-group">
+										<a href="{{ path("edituser", {id: user.id}) }}" class="btn btn-warning" type="button"><i class="fas fa-edit"></i></a>
+										<a href="{{ path("deluser", {id: user.id}) }}" class="btn btn-danger" type="button"><i class="fas fa-trash-alt"></i></a>
+									</div>
+								</td>
+							</tr>
+    					{% endfor %}
+    					</tbody>
+    				</table>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4 mb-2">
+			<a href="{{ path('adduser') }}" class="btn btn-success float-right" type="button"><i class="fas fa-plus-circle fa-lg"></i>&nbsp;Nouvel utilisateur</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
