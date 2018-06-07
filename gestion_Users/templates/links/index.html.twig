@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+        <div class="row mt-2 align-items-center">
+            <div class="col-md-6">
+                <p>
+                    Bienvenue {{ app.user.lastname}} {{ app.user.firstname}}.<br />
+                    Le test fonctionne bien<br />
+                </p>
+            </div>
+            <div class="col-md-6">    
+                <p>
+                	Binetôt la liste des liens se trouvera ici
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
